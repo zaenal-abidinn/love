@@ -474,14 +474,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
+      justify-content: flex-start;
+      padding: 2rem 1.5rem 6rem; /* bottom padding for nav buttons */
       z-index: 30;
       opacity: 0;
       transform: scale(0.96);
       transition: opacity 0.5s ease, transform 0.5s ease;
       pointer-events: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+      /* Custom scrollbar */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
     }
+    .rv-slide::-webkit-scrollbar { width: 4px; }
+    .rv-slide::-webkit-scrollbar-track { background: transparent; }
+    .rv-slide::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
     .rv-slide.active {
       opacity: 1;
       transform: scale(1);
@@ -496,17 +504,20 @@
       max-width: 440px;
       width: 100%;
       z-index: 5;
+      margin: auto 0; /* vertically center when content is short */
+      min-height: min-content;
     }
 
     .rv-slide-image {
       width: 100%;
-      max-height: 45vh;
+      max-height: 35vh; /* reduced so text has more room */
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.4);
       opacity: 0;
       animation: imgReveal 0.8s ease-out forwards;
       animation-delay: 0.2s;
+      flex-shrink: 0;
     }
     @keyframes imgReveal {
       from { opacity: 0; transform: scale(0.95); }
